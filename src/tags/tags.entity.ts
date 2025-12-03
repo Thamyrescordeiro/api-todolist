@@ -1,5 +1,6 @@
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
   Default,
@@ -9,6 +10,8 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { User } from '../users/users.entity';
+import { Task } from '../tasks/tasks.entity';
+import { TaskTag } from './task-tag.entity';
 
 export interface CreateTagsAttributes {
   name: string;
@@ -34,6 +37,9 @@ export class Tag extends Model<Tag, CreateTagsAttributes> {
     allowNull: false,
   })
   declare color: string;
+
+  @BelongsToMany(() => Task, () => TaskTag)
+  tasks: Task[];
 
   @ForeignKey(() => User)
   @Column({

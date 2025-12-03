@@ -2,10 +2,13 @@ import {
   Column,
   DataType,
   Default,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+import { Task } from '../tasks/tasks.entity';
+import { Tag } from '../tags/tags.entity';
 
 export interface UserAttributes {
   user_id: string;
@@ -37,4 +40,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> {
     allowNull: false,
   })
   declare password: string;
+
+  @HasMany(() => Task)
+  tasks: Task[];
+
+  @HasMany(() => Tag)
+  tags: Tag[];
 }
