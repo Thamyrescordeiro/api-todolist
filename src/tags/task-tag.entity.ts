@@ -10,5 +10,5 @@ export class TaskTag extends Model<TaskTag> {
 
   @ForeignKey(() => Tag)
   @Column
-  tagId: number;
+  tagId: string;
 }
